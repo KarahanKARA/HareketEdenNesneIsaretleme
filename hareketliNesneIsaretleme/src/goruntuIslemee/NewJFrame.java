@@ -1,6 +1,6 @@
 
 // OpenCV kütüphanesi entegre edilmelidir
-package pkg151213048_karahankara;
+package goruntuIslemee;
 
 import java.awt.Color;
 import java.util.List;
