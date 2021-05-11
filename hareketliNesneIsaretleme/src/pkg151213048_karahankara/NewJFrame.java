@@ -1,12 +1,9 @@
 
+// OpenCV kütüphanesi entegre edilmelidir
 package pkg151213048_karahankara;
 
-import com.sun.scenario.effect.impl.prism.PrImage;
 import java.awt.Color;
-import java.awt.Component;
 import java.util.List;
-import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,46 +12,19 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.imageio.metadata.IIOInvalidTreeException;
-import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.metadata.IIOMetadataNode;
-import static javax.print.attribute.ResolutionSyntax.DPI;
-import static javax.print.attribute.Size2DSyntax.INCH;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
-import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
-import java.awt.Dimension;
-import java.awt.image.RenderedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.util.Iterator;
-import javax.imageio.IIOImage;
-import javax.imageio.ImageTypeSpecifier;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.imageio.stream.ImageOutputStream;
 
 public class NewJFrame extends javax.swing.JFrame {
 
-    
     public NewJFrame() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -83,27 +53,27 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jButton1)
-                .addGap(141, 141, 141)
-                .addComponent(jButton2)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGap(155, 155, 155)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(65, 65, 65))
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(46, 46, 46)
+                .addComponent(jButton2)
+                .addGap(73, 73, 73))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fc = new JFileChooser("C:\\Users\\karah\\Desktop");
+        JFileChooser fc = new JFileChooser("C:\\Users\\karahan\\Desktop"); // video seçim ekranı
         int sonuc = fc.showOpenDialog(null);
         fc.setDialogTitle("Lütfen videoyu seçiniz.");
         fc.setSize(700, 500);
@@ -111,20 +81,14 @@ public class NewJFrame extends javax.swing.JFrame {
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         File path = fc.getSelectedFile();
         System.out.println(path);
-        
         String yol= path.toString();
-        
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-
         VideoCapture cap = new VideoCapture();
-
         String input = yol;
-        String output = "C:\\Users\\karah\\Desktop\\donemprojesi\\dosyalar";
+        String output = "C:\\Users\\karahan\\Desktop\\GoruntuIsleme\\fotograflar"; // videonun fotograflara parçalanıp, fotografların kaydedileceği kısım
 
         cap.open(input);
 
-        int video_length = (int) cap.get(Videoio.CAP_PROP_FRAME_COUNT);
-        int frames_per_second = (int) cap.get(Videoio.CAP_PROP_FPS);
         int frame_number = (int) cap.get(Videoio.CAP_PROP_POS_FRAMES);
         
         
@@ -139,7 +103,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 cap.read(frame);
                 cap.read(frame);
                 cap.read(frame);
-                cap.read(frame);
+                cap.read(frame); // fotograf sayısını düşürmek için yapılan işlem
             }
             cap.release();
         } else {
@@ -150,11 +114,10 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int fotoSayisi = new File("C:\\Users\\karah\\Desktop\\donemprojesi\\dosyalar\\").list().length;
+        int fotoSayisi = new File("C:\\Users\\karahan\\Desktop\\GoruntuIsleme\\fotograflar\\").list().length;
         fotoSayisi --;
         int width = 0, height = 0;
-
-        File a = new File("C:\\Users\\karah\\Desktop\\donemprojesi\\dosyalar\\0.jpg");
+        File a = new File("C:\\Users\\karahan\\Desktop\\GoruntuIsleme\\fotograflar\\0.jpg");
         BufferedImage sizeHandler=null;
         try {
             sizeHandler = ImageIO.read(a);
@@ -168,7 +131,7 @@ public class NewJFrame extends javax.swing.JFrame {
             BufferedImage img = null;
             File f;
             try {
-                f = new File("C:\\Users\\karah\\Desktop\\donemprojesi\\dosyalar\\"+i+".jpg");
+                f = new File("C:\\Users\\karahan\\Desktop\\GoruntuIsleme\\fotograflar\\"+i+".jpg");
                 img = ImageIO.read(f);
 
             } catch (IOException e) {
@@ -202,7 +165,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
 
-        File outputfile = new File("C:\\Users\\karah\\Desktop\\donemprojesi\\background.png");
+        File outputfile = new File("C:\\Users\\karahan\\Desktop\\GoruntuIsleme\\fotograflar\\background.png"); //arkaplan fotografının olusturuldugu kısım
         try {
             ImageIO.write(backgroundImg, "png", outputfile);
         } catch (IOException e) {
@@ -212,8 +175,7 @@ public class NewJFrame extends javax.swing.JFrame {
         /////////////////
         
         BufferedImage redImage = new BufferedImage(sizeHandler.getWidth(),sizeHandler.getHeight(),BufferedImage.TYPE_INT_ARGB);
-        Integer redArray[][][] = new Integer[fotoSayisi][width][height];
-        File redOutput = null;
+        
         for (int i = 1; i <= fotoSayisi; i++) { //  frame
             for (int w = 0; w < width; w++) {
                 for (int h = 0; h < height; h++) {
@@ -227,9 +189,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                 }
             }
-            float s =(float) 0;
             System.out.println(i+". foto");
-            File tempik = new File("C:\\Users\\karah\\Desktop\\donemprojesi\\kirmizi\\"+i+".png");
+            File tempik = new File("C:\\Users\\karahan\\Desktop\\GoruntuIsleme\\fotograflar\\kirmizi\\"+i+".png"); // fotograflardaki değişen pixelleri kırmızıya boyayıp yeni klasöre yazdırıyoruz
             try {
                 ImageIO.write(redImage, "png", tempik);
                
@@ -239,8 +200,8 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         System.out.println("İşlem Tamamlandı");
     }//GEN-LAST:event_jButton2ActionPerformed
-    static boolean similarTo(Color background, Color current) {
-            double distance =
+    static boolean similarTo(Color background, Color current) { // fotografların arkaplan fotografları ile pixel rgb değeleri karşılaştırılıyor
+            double distance =                                   // fark olup olmadıgını yani pixel değerinin değişiğ değişmedigini döndürüyor.
                     (background.getRed() - current.getRed()) * (background.getRed() - current.getRed()) +
                             (background.getGreen() - current.getGreen()) * (background.getGreen() - current.getGreen()) +
                             (background.getBlue() - current.getBlue()) * (background.getBlue() - current.getBlue());
@@ -250,21 +211,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 return false;
             }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
